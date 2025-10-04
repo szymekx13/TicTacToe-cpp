@@ -7,10 +7,10 @@
 
 const int SIZE = 3;
 
-// Funkcja sprawdzaj¹ca zwyciêstwo lub remis
+// A function that checks for a win or a draw
 char checkWin(const std::array<std::array<char, SIZE>, SIZE>& board)
 {
-    // Sprawdzenie wierszy i kolumn
+    // Checking rows and columns
     for (int i = 0; i < SIZE; ++i)
     {
         if (board[i][0] != 0 && board[i][0] == board[i][1] && board[i][1] == board[i][2])
@@ -19,13 +19,13 @@ char checkWin(const std::array<std::array<char, SIZE>, SIZE>& board)
             return board[0][i];
     }
 
-    // Sprawdzenie przek¹tnych
+    // Checking the diagonals
     if (board[0][0] != 0 && board[0][0] == board[1][1] && board[1][1] == board[2][2])
         return board[0][0];
     if (board[0][2] != 0 && board[0][2] == board[1][1] && board[1][1] == board[2][0])
         return board[0][2];
 
-    // Sprawdzenie remisu
+    // Checking for draw
     bool full = true;
     for (auto& row : board)
         for (char c : row)
@@ -33,7 +33,7 @@ char checkWin(const std::array<std::array<char, SIZE>, SIZE>& board)
 
     if (full) return 'D'; // D = Draw
 
-    return 0; // Gra trwa
+	return 0; // Game continues
 }
 
 int main()
@@ -51,7 +51,7 @@ int main()
 
     while (window.isOpen())
     {
-        // Obs³uga zdarzeñ
+        // Event handling
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -68,7 +68,7 @@ int main()
                     {
                         board[row][col] = currentPlayer;
 
-                        // Sprawdzenie stanu gry
+                        // checking game status
                         char result = checkWin(board);
                         if (result == 'X' || result == 'O')
                         {
@@ -78,7 +78,7 @@ int main()
                             window.display();
                             std::this_thread::sleep_for(std::chrono::seconds(2));
 
-                            // Reset planszy
+                            // reset board
                             board = {};
                             currentPlayer = 'X';
                             infoText.setString("Turn: X");
@@ -98,7 +98,7 @@ int main()
                             continue;
                         }
 
-                        // Zmiana gracza
+                        // change player
                         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
                         infoText.setString("Turn: " + std::string(1, currentPlayer));
                     }
@@ -106,7 +106,7 @@ int main()
             }
         }
 
-        // Czyszczenie i rysowanie planszy
+        // Resetting window
         window.clear(sf::Color::White);
 
         // Siatka
@@ -122,7 +122,7 @@ int main()
             window.draw(line);
         }
 
-        // X i O
+        // X and O
         for (int r = 0; r < SIZE; r++)
             for (int c = 0; c < SIZE; c++)
                 if (board[r][c] != 0)
@@ -133,7 +133,7 @@ int main()
                     window.draw(text);
                 }
 
-        // Tekst o turze / wyniku
+        // Text about turn
         window.draw(infoText);
 
         window.display();
