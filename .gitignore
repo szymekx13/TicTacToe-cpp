@@ -1,0 +1,22 @@
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build
+Debug/
+Release/
+x64/
+bin/
+obj/
+
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Git
+*.lock
