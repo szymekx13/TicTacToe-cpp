@@ -20,8 +20,7 @@ IF NEED UPDATE LINE 43 WITH YOUR FONT DIRECTORY
 ## Project Structure
 
 - `main.cpp` – main program file  
-- `External/` – SFML libraries  
-- `Resources/` – game assets (fonts, images, etc.)  
+- `External/` – SFML libraries and fonts 
 
 ## License
 
